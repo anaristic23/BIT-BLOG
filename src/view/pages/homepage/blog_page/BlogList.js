@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { BlogItem } from './BlogItem';
+import { fetchPosts } from '../../../../services/PostsService';
 
-const BlogList = () => {
-    return (
-        <div className="container">
-            <h2>POSTS</h2>
-            <div className="divider"></div>
-            <div className="section">
-                <h5>Section 1</h5>
-                <p>Stuff</p>
-            </div>
-            <div className="divider"></div>
-            <div className="section">
-                <h5>Section 2</h5>
-                <p>Stuff</p>
-            </div>
-            <div className="divider"></div>
-            <div className="section">
-                <h5>Section 3</h5>
-                <p>Stuff</p>
-            </div>
-        </div>
-    )
+class BlogList extends Component {
+    constructor(props) {
+        super(props)
 
+        this.state = {
+            posts: []
+        }
+    }
+
+    fetchPosts = () => {
+        fetchPosts()
+            .then(posts => this.setState({ posts }))
+    }
+
+    componentDidMount() {
+        this.fetchPosts()
+    }
+
+    render() {
+        const { posts } = this.state;
+
+        const postItems = posts.map((post, id) => {
+            return <BlogItem key={id} postsList={post} />
+        })
+
+        return (
+            <div className="container">
+                <h4>POSTS</h4>
+
+                {postItems}
+            </div>
+        )
+    }
 }
+
 export { BlogList }
