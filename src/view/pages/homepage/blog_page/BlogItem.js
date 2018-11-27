@@ -4,14 +4,14 @@ import { Post } from '../../../../entities/Post'
 
 
 const BlogItem = (props) => {
-    const { postsList } = props;
-    const { title, body } = postsList;
+    const { singlePost } = props;
+    const { title, body, id } = singlePost;
 
     return (
         <div>
             <div className="divider"></div>
             <div className="section">
-                <h5><Link to="/single" >{title}</Link></h5>
+                <h5><Link to={"/single/" + id} >{title}</Link></h5>
                 <p>{body}</p>
             </div>
         </div>

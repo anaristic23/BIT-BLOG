@@ -24,7 +24,7 @@ class BlogList extends Component {
         const { posts } = this.state;
 
         const postItems = posts.map((post, id) => {
-            return <BlogItem key={id} postsList={post} />
+            return <BlogItem key={id} singlePost={post} />
         })
 
         return (

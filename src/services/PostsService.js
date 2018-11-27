@@ -11,15 +11,26 @@ const fetchPosts = () => {
         })
         .then(data => {
             const postsData = data.map(data => {
-                return new Post(data.title, data.body)
+                return new Post(data.title, data.body, data.id)
             })
             return postsData;
         })
 
 }
 
-const fetchPost = (id) => { }
+const fetchPost = (id) => {
+    const urlPost = BASE_ENDPOINT + "/posts/" + id;
+    return fetch(urlPost)
+        .then(response => response.json())
+        .then(data => {
+            return new Post(data.title, data.body, data.id)
+        })
 
-const createPost = () => { }
+}
 
-export { fetchPosts }
+
+
+
+// const createPost = () => { }
+
+export { fetchPosts, fetchPost }
